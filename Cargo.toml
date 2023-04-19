@@ -1,6 +1,6 @@
 [package]
-name = "package-name"
-version = "0.1.0"
+name = "q-api-answers"
+version = "0.1.1"
 edition = "2021"
 
 [profile.release]

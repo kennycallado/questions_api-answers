@@ -8,9 +8,9 @@ services:
     expose:
       - "5432:5432"
     environment:
-      POSTGRES_DB: base
-      POSTGRES_USER: base
-      POSTGRES_PASSWORD: base
+      POSTGRES_DB: answers
+      POSTGRES_USER: answers
+      POSTGRES_PASSWORD: answers
     command: [ "docker-entrypoint.sh", "-c", "wal_level=logical" ]
 
   auth_api:
@@ -38,7 +38,7 @@ services:
     expose:
       - "8001:8000"
     environment:
-      - ROCKET_DATABASES={questions={url="postgres://base:base@database/base"}}
+      - ROCKET_DATABASES={questions={url="postgres://answers:answers@database/answers"}}
       - ROCKET_ADDRESS="0.0.0.0"
       - ROCKET_PORT=8000
       - ROCKET_SECRET_KEY=""
@@ -54,7 +54,7 @@ services:
     expose:
       - "8002:8000"
     environment:
-      - ROCKET_DATABASES={questions={url="postgres://base:base@database/base"}}
+      - ROCKET_DATABASES={questions={url="postgres://answers:answers@database/answers"}}
       - ROCKET_ADDRESS="0.0.0.0"
       - ROCKET_PORT=8000
       - ROCKET_SECRET_KEY=""
@@ -64,19 +64,19 @@ services:
     depends_on:
       - database
       - profiles_api # that was important for the migrations
-      - fcm_api # that was important for the migrations
+  #     - fcm_api # that was important for the migrations
 
-  fcm_api:
-      image: kennycallado/q-api-fcm:latest
-      ports:
-        - "8005:8000"
-      expose:
-        - "8005:8000"
-      environment:
-        - ROCKET_DATABASES={questions={url="postgres://base:base@database/base"}}
-        - ROCKET_ADDRESS="0.0.0.0"
-        - ROCKET_PORT=8000
-        - ROCKET_SECRET_KEY=""
-        - ROCKET_MIGRATIONS_RUN=true
-      depends_on:
-        - database
+  # fcm_api:
+  #     image: kennycallado/q-api-fcm:latest
+  #     ports:
+  #       - "8005:8000"
+  #     expose:
+  #       - "8005:8000"
+  #     environment:
+  #       - ROCKET_DATABASES={questions={url="postgres://answers:answers@database/answers"}}
+  #       - ROCKET_ADDRESS="0.0.0.0"
+  #       - ROCKET_PORT=8000
+  #       - ROCKET_SECRET_KEY=""
+  #       - ROCKET_MIGRATIONS_RUN=true
+  #     depends_on:
+  #       - database

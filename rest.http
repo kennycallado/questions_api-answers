@@ -1,0 +1,18 @@
+
+GET http://localhost:8000/health
+
+GET http://localhost:8001/health
+
+GET http://localhost:8002/health
+
+GET http://localhost:8003/health
+
+GET http://localhost:8003/auth/bypass/1
+Accpet: application/json
+
+
+# {{{ questions
+
+
+
+# }}}
